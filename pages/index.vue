@@ -20,21 +20,21 @@
       </div>
       <div class="d-flex justify-content-between padding-navbar pb-3">
         <button type="button" class="btn btn-light rounded-pill">Semua</button>
-        <button type="button" class="btn btn-light rounded-pill">Atasan</button>
+        <button type="button" class="btn btn-light rounded-pill">Korean</button>
         <button type="button" class="btn btn-light rounded-pill">
-          Bawahan
+          Spicy Food
         </button>
-        <button type="button" class="btn btn-light rounded-pill">Hijab</button>
+        <button type="button" class="btn btn-light rounded-pill">Thai</button>
         <button type="button" class="btn btn-light rounded-pill">
-          Aksesoris
+          Nusantara
         </button>
-        <button type="button" class="btn btn-light rounded-pill">Dewasa</button>
+        <button type="button" class="btn btn-light rounded-pill">Japanese</button>
         <button type="button" class="btn btn-light rounded-pill">
-          Anak anak
+          Beverage
         </button>
       </div>
     </div>
-    <div class="row padding-navbar">
+    <div id="product" class="row padding-navbar">
       <div
         class="col-lg-3 col-md-6 pb-5"
         v-for="(item, index) in data"
@@ -48,7 +48,7 @@
           <h6 class="p-3">
             <strong>Rp. {{ item.original_price }}</strong>
           </h6>
-          <button class="btn btn-danger" @click="bayar">Masukan Ke Keranjang</button>
+          <button :disabled="loading" class="btn btn-danger" @click="cart(item.id)">Masukan Ke Keranjang</button>
         </div>
       </div>
     </div>
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       data: [],
+      loading:false,
     }
   },
   methods: {
@@ -66,6 +67,14 @@ export default {
       await this.$axios.get('api/product').then((res) => {
         this.data = res.data.data
         console.log(this.data)
+      })
+    },
+    async cart(id) {
+      this.loading=true
+      await this.$axios.post('api/cart/'+id).then((res) => {
+      this.loading=false
+        console.log(this.data)
+        this.$router.push('/cart')
       })
     },
   },

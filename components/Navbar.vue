@@ -18,7 +18,7 @@
             ><nuxt-link to="/">Beranda</nuxt-link></b-nav-item
           >
           <b-nav-item href="#"
-            ><nuxt-link to="/product">Produk</nuxt-link></b-nav-item
+            ><nuxt-link to="#product">Produk</nuxt-link></b-nav-item
           >
           <b-nav-item href="#"
             ><nuxt-link to="/promo">Promo</nuxt-link></b-nav-item
@@ -33,13 +33,15 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ms-auto">
-          <b-nav-item href="#"
-            ><i class="fa-solid fa-cart-shopping"></i
-          ></b-nav-item>
+          <b-nav-item>
+            <router-link to="/cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            </router-link>
+            </b-nav-item>
           <b-nav-item-dropdown v-if="$auth.user" right>
             <!-- Using 'button-content' slot -->
             <template #button-content>
-              <em>{{$auth.user.name}}</em>
+              <em>{{ $auth.user.name }}</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item @click="logout" href="#">Sign Out</b-dropdown-item>
@@ -53,18 +55,18 @@
   </div>
 </template>
 <style scoped>
-  a{
-    color: black;
-    text-decoration: none;
-  }
+a {
+  color: black;
+  text-decoration: none;
+}
 </style>
 <script>
 export default {
-  methods:{
-    async logout(){
+  methods: {
+    async logout() {
       await this.$auth.logout()
-      location.reload();
-    }
-  }
+      location.reload()
+    },
+  },
 }
 </script>
