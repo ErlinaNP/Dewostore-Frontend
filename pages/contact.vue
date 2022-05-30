@@ -11,34 +11,37 @@
           <p class="fw-bold">Pakuwon Mall, Jalan Lontar No. 20A, Surabaya</p>
           <label for="">Jam Buka:</label>
           <table class="border-0 w-100">
-            <tr class="fw-bold">
-              <td>Senin</td>
-              <td>9AM-10PM</td>
-            </tr>
-            <tr>
-              <td>Selasa</td>
-              <td>9AM-10PM</td>
-            </tr>
-            <tr>
-              <td>Rabu</td>
-              <td>9AM-10PM</td>
-            </tr>
-            <tr>
-              <td>Kamis</td>
-              <td>9AM-10PM</td>
-            </tr>
-            <tr>
-              <td>Jumat</td>
-              <td>9AM-10PM</td>
-            </tr>
-            <tr>
-              <td>Sabtu</td>
-              <td>9AM-10PM</td>
-            </tr>
-            <tr>
-              <td>Minggu</td>
-              <td>9AM-10PM</td>
-            </tr>
+            <tbody>
+              <tr class="fw-bold">
+                <td>Senin</td>
+                <td>9AM-10PM</td>
+              </tr>
+              <tr>
+                <td>Selasa</td>
+                <td>9AM-10PM</td>
+              </tr>
+              <tr>
+                <td>Rabu</td>
+                <td>9AM-10PM</td>
+              </tr>
+              <tr>
+                <td>Kamis</td>
+                <td>9AM-10PM</td>
+              </tr>
+              <tr>
+                <td>Jumat</td>
+                <td>9AM-10PM</td>
+              </tr>
+              <tr>
+                <td>Sabtu</td>
+                <td>9AM-10PM</td>
+              </tr>
+              <tr>
+                <td>Minggu</td>
+                <td>9AM-10PM</td>
+              </tr>
+
+            </tbody>
           </table>
           <label for="" class="
           pt-3">Telepon :</label>

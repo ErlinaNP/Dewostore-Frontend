@@ -14,42 +14,41 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#"
-            ><nuxt-link to="/">Beranda</nuxt-link></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><nuxt-link to="#product">Produk</nuxt-link></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><nuxt-link to="/promo">Promo</nuxt-link></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><nuxt-link to="/about-us">Tentang Kami</nuxt-link></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><nuxt-link to="/contact">Hubungi Kami</nuxt-link></b-nav-item
-          >
+          <b-nav-item tag="nuxt-link" to="/">
+            Beranda
+          </b-nav-item>
+          <b-nav-item tag="nuxt-link" to="/product">
+            Produk
+          </b-nav-item>
+          <b-nav-item tag="nuxt-link" to="#">
+            Promo
+          </b-nav-item>
+          <b-nav-item tag="nuxt-link" to="/about-us">
+           Tentang Kami
+          </b-nav-item>
+          <b-nav-item tag="nuxt-link" to="/contact">
+            Hubungi Kami
+          </b-nav-item>
         </b-navbar-nav>
 
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ms-auto">
-          <b-nav-item>
-            <router-link to="/cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            </router-link>
+            <b-nav-item tag="nuxt-link" to="/cart">
+                <i class="fa-solid fa-cart-shopping"></i>
             </b-nav-item>
-          <b-nav-item-dropdown v-if="$auth.user" right>
-            <!-- Using 'button-content' slot -->
-            <template #button-content>
-              <em>{{ $auth.user.name }}</em>
-            </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item @click="logout" href="#">Sign Out</b-dropdown-item>
-          </b-nav-item-dropdown>
-          <b-nav-item v-else href="#"
-            ><nuxt-link to="/login">Masuk</nuxt-link></b-nav-item
-          >
-        </b-navbar-nav>
+            <b-nav-item v-if="$auth.user" tag="nuxt-link" to="/profile">
+              <div class="photo-profile"></div>
+            </b-nav-item>
+            <b-nav-item-dropdown v-if="$auth.user" right>
+              <template #button-content>
+                <em>{{ $auth.user.name }}</em>
+              </template>
+              <b-dropdown-item tag="nuxt-link" to="/profile">Profile</b-dropdown-item>
+              <b-dropdown-item @click="logout" href="#">Sign Out</b-dropdown-item>
+            </b-nav-item-dropdown>
+            <b-nav-item v-else tag="nuxt-link" to="/login">
+            Masuk
+            </b-nav-item>
+          </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>

@@ -6,8 +6,7 @@
           src="/aboutus.png"
           class="w-100 bright-50"
           height="350px"
-          object-fit:
-          contain;
+          style="object-fit: cover;"
         />
         <h1 class="text-white absolute-center title-font">About Us</h1>
       </div>
@@ -23,5 +22,3 @@
     </div>
   </div>
 </template>
-
-<script></script>

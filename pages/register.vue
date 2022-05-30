@@ -53,7 +53,7 @@
               placeholder="Password"
             />
           </div>
-          <button type="submit" class="btn btn-primary w-100 rounded-pill mt-5">
+          <button type="submit" class="btn btn-primary text-white w-100 rounded-pill mt-5">
             Submit
           </button>
           Sudah punya akun web store? <nuxt-link to="/login" class="text-primary">Click disini!</nuxt-link>

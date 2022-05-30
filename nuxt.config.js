@@ -1,7 +1,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-marketplace',
@@ -26,7 +26,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-
+    "~/plugins/filter.js",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,7 +52,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     credentials: false,
-    baseURL: 'http://api.dewostore.web.id/public',
+    baseURL: 'http://localhost:8000',
   },
   auth: {
     strategies: {

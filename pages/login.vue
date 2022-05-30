@@ -30,7 +30,7 @@
               placeholder="Password"
             />
           </div>
-          <button type="submit" class="btn btn-primary w-100 rounded-pill mt-5">
+          <button type="submit" class="btn btn-primary text-white w-100 rounded-pill mt-5">
             Selanjutnya
           </button>
           Belum punya akun web store? <nuxt-link to="/register" class="text-primary">Daftar</nuxt-link>
