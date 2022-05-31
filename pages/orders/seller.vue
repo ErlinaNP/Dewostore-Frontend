@@ -36,7 +36,6 @@
               <span
                 v-else-if="item.status == 'pending' || item.status == 'UNPAID'"
                 class="btn btn-info text-white fw-bold d-block"
-                @click="bayar(item.token)"
               >
                 Menunuggu di Bayar
               </span>
@@ -63,7 +62,7 @@ export default {
       this.$router.push('/orders/detail/' + id)
     },
     async fetch() {
-      await this.$axios.get('api/order').then((res) => {
+      await this.$axios.get('api/order/seller/list').then((res) => {
         this.data = res.data
         console.log(this.data)
       })

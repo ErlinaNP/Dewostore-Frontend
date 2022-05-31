@@ -21,6 +21,9 @@
       <div class="col-3">
         <div class="card border-0 shadow p-3">
           <h6 class="fw-bold w-100 text-center">Kategori</h6>
+          <button @click="filter('')"  class="btn">
+            Semua
+          </button>
           <button @click="filter(item.id)" v-for="(item, index) in category" :key="index" class="btn">
             {{ item.nama }}
           </button>

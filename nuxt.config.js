@@ -52,7 +52,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     credentials: false,
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://api.dewostore.web.id/public',
   },
   auth: {
     strategies: {

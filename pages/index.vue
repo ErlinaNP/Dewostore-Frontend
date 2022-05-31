@@ -19,6 +19,7 @@
         <strong>Kategori</strong>
       </div>
       <div class="d-flex justify-content-between padding-navbar pb-3">
+        <button @click="filter('')" class="btn btn-light rounded-pill">Semua</button>
         <button
           v-for="(item, index) in category"
           :key="index"

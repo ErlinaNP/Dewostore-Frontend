@@ -38,12 +38,28 @@
                       <h6 class="fw-bold">{{ data.title }}</h6>
                     </div>
                     <div class="col-4">
-                      <span class="fw-bold"> {{ data.original_price | toCurrency }} </span>
+                      <span class="fw-bold">
+                        {{ data.original_price | toCurrency }}
+                      </span>
                     </div>
                   </div>
                   <div class="row border-top p-3">
                     <div class="d-flex w-100 justify-content-end">
-                      <span class="text-secondary d-bloxk">Stock : {{data.stock}}</span>
+                      <div class="d-flex flex-column">
+                        <span>Stock</span>
+                        <input
+                          v-model="data.stock"
+                          type="number"
+                          class="form-control"
+                        />
+                        <button
+                          type="button"
+                          class="btn btn-primary text-white"
+                          @click="updateStock"
+                        >
+                          Update Stock
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -162,9 +178,13 @@
                     class="form-control"
                     v-model="data.category_id"
                   >
-                  <option v-for="item,index in category" :key="index" :value="item.id">
-                    {{item.nama}}
-                  </option>
+                    <option
+                      v-for="(item, index) in category"
+                      :key="index"
+                      :value="item.id"
+                    >
+                      {{ item.nama }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -338,6 +358,13 @@
                 class="btn btn-outline-secondary me-3"
                 >Batal</nuxt-link
               >
+              <button
+                @click="deleteData($route.params.id)"
+                type="button"
+                class="btn btn-danger text-white me-3"
+              >
+                Hapus
+              </button>
               <button class="btn btn-primary text-white">Simpan</button>
             </div>
           </div>
@@ -362,21 +389,32 @@ export default {
         original_price: 0,
         title: '',
         assurance: false,
-        stock: 0,
+        stock: '',
         weight: 0,
         description: '',
-        category_id:'',
+        category_id: '',
       },
     }
   },
   methods: {
     async fetch() {
       await this.$axios
-        .get('api/category')
+        .get('api/product/' + this.$route.params.id)
         .then((res) => {
-          this.category = res.data
-          console.log(this.category)
+          this.data = res.data
+          this.data.stock = this.data.in_stock
+          this.data.videourl = this.data.video
         })
+      await this.$axios.get('api/category').then((res) => {
+        this.category = res.data
+        console.log(this.category)
+      })
+    },
+    deleteData(id) {
+      this.loading = true
+      this.$axios.delete('api/product/' + id).then((res) => {
+        this.$router.push('/product_seller')
+      })
     },
     clickAddFile() {
       document.getElementById('productImg').click()
@@ -402,19 +440,30 @@ export default {
       for (const key in this.data) {
         formData.append(key, this.data[key])
       }
-      this.image_list.forEach((element,index) => {
-        formData.append("photo["+index+"]", this.image_list[index])
-      });
-      const headers = { 'Content-Type': 'multipart/form-data' }
-      this.$axios.post('api/product', formData, headers).then((res) => {
-                this.$router.push('/product_seller')
-
+      this.image_list.forEach((element, index) => {
+        formData.append('photo[' + index + ']', this.image_list[index])
       })
+      const headers = { 'Content-Type': 'multipart/form-data' }
+      this.$axios
+        .post('api/product/' + this.$route.params.id, formData, headers)
+        .then((res) => {
+          this.$router.push('/product_seller')
+        })
+    },
+    submitStock() {
+      const formData = new FormData()
+      formData.append('stock', this.data.stock)
+      const headers = { 'Content-Type': 'multipart/form-data' }
+      this.$axios
+        .post('api/product/' + this.$route.params.id, formData, headers)
+        .then((res) => {
+          this.$router.push('/product_seller')
+        })
     },
   },
-  mounted(){
+  mounted() {
     this.fetch()
-  }
+  },
 }
 </script>
 <style scoped>

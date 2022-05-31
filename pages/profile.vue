@@ -33,6 +33,13 @@
               >My Order</nuxt-link
             >
           </li>
+          <li class="nav-item">
+            <nuxt-link
+              class="nav-link text-dark"
+              to="/orders/seller"
+              >My Order (Seller)</nuxt-link
+            >
+          </li>
         </ul>
       </div>
       <div class="card-body">

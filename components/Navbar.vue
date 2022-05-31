@@ -7,7 +7,7 @@
       class="shadow padding-navbar"
     >
       <nuxt-link to="/">
-        <img src="logo.svg" alt="" srcset="" />
+        <img src="/logo.svg" alt="" srcset="" />
       </nuxt-link>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

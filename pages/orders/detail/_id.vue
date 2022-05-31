@@ -19,7 +19,10 @@
                 srcset=""
               />
               <div class="ms-5">
-                <strong>{{ it.product.title }}</strong>
+                <strong
+                  >{{ it.product.title }} <span class="fw-bold">x</span>
+                  {{ it.sum }}</strong
+                >
                 <p>{{ it.product.original_price | toCurrency }}</p>
                 <p class="text-secondary">{{ it.catatan }}</p>
               </div>
@@ -35,16 +38,29 @@
           </p>
         </div>
         <div class="card border-0 shadow p-3 mb-3">
-          <h6>Pilih Kurir</h6>
-          <span>{{ data.kurir }}</span>
-          <span>{{ data.ongkir | toCurrency }}</span>
+          <h6 class="fw-bold mb-3">Ringkasan Pembayaran</h6>
+          <div class="d-flex justify-content-between mb-3">
+            <span>Subtotal Produk</span>
+            <span>{{ data.price | toCurrency }}</span>
+          </div>
+          <div class="d-flex justify-content-between border-bottom mb-3">
+            <span>{{ data.kurir }}</span>
+            <span>{{ data.ongkir | toCurrency }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-3">
+            <span class="fw-bold">Total Harga</span>
+            <span>{{ (data.price + data.ongkir) | toCurrency }}</span>
+          </div>
         </div>
         <div v-if="!loading" class="card border-0 shadow p-3">
           <div v-if="data.status == 'capture' || data.status == 'settlement'">
             <span class="btn btn-warning text-white fw-bold d-block">
               Dalam Pengiriman
             </span>
-            <div class="d-flex justify-content-center mt-3">
+            <div
+              v-if="$auth.user.id == data.buyer_id"
+              class="d-flex justify-content-center mt-3"
+            >
               <button @click="terimaProduct" class="btn btn-success">
                 Konfirmasi Produk Telah Diterima
               </button>
@@ -55,14 +71,28 @@
             class="d-flex justify-content-center"
           >
             <button
+              v-if="$auth.user.id == data.buyer_id"
               :disabled="loading"
               @click="bayar"
-              class="btn btn-info text-white rounded-pill"
+              class="btn btn-primary text-white rounded-pill w-100"
             >
-              Checkout
+              Bayar
+            </button>
+            <button
+              v-else
+              disabled
+              @click="bayar"
+              class="btn btn-primary text-white rounded-pill w-100"
+            >
+              Menunggu Buyer Membayar
             </button>
           </span>
-          <span v-else-if="data.status == 'finish'" class="btn btn-success text-white fw-bold d-block"> Selesai </span>
+          <span
+            v-else-if="data.status == 'finish'"
+            class="btn btn-success text-white fw-bold d-block"
+          >
+            Selesai
+          </span>
           <span v-else class="btn btn-danger text-white fw-bold d-block">
             Produk Gagal Dibeli
           </span>
@@ -122,8 +152,9 @@ export default {
         })
         .then(() => {
           this.fetch()
-        }).catch((err)=>{
-          console.log(err);
+        })
+        .catch((err) => {
+          console.log(err)
         })
     },
   },
