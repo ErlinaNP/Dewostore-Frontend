@@ -49,11 +49,19 @@
           </div>
           <div class="d-flex justify-content-between mb-3">
             <span class="fw-bold">Total Harga</span>
-            <span>{{ (data.price + data.ongkir) | toCurrency }}</span>
+            <span>{{
+              (Number(data.price) + Number(data.ongkir)) | toCurrency
+            }}</span>
           </div>
         </div>
         <div v-if="!loading" class="card border-0 shadow p-3">
-          <div v-if="data.status == 'capture' || data.status == 'settlement'">
+          <span
+            v-if="data.status == 'capture' || data.status == 'settlement'"
+            class="btn btn-warning text-white fw-bold d-block"
+          >
+            Produk Sedang di Prosses & Dikirim
+          </span>
+          <div v-if="data.status == 'delivering'">
             <span class="btn btn-warning text-white fw-bold d-block">
               Dalam Pengiriman
             </span>
@@ -84,7 +92,7 @@
               @click="bayar"
               class="btn btn-primary text-white rounded-pill w-100"
             >
-              Menunggu Buyer Membayar
+              Menunggu Pesanan Dibayar
             </button>
           </span>
           <span
@@ -93,9 +101,15 @@
           >
             Selesai
           </span>
-          <span v-else class="btn btn-danger text-white fw-bold d-block">
-            Produk Gagal Dibeli
-          </span>
+          <div v-else>
+            <span class="btn btn-danger text-white fw-bold d-block">
+              Produk Batal Dibeli
+            </span>
+            <small>
+              <span class="text-danger">*</span> Untuk Informasi Pembatalan /
+              Refund Hubungi Kontak Kami di <strong>Hubungi Kami</strong>
+            </small>
+          </div>
         </div>
       </div>
     </div>

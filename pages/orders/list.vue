@@ -13,7 +13,7 @@
               <h6 class="fw-bold text-secondary">{{ item.invoice }}</h6>
               <small>Harga</small>
               <h6 class="fw-bold">
-                {{ (item.price + item.ongkir) | toCurrency }}
+                {{ (Number(item.price) + Number(item.ongkir)) | toCurrency }}
               </h6>
             </div>
             <div class="col-6">
@@ -31,7 +31,13 @@
                 v-if="item.status == 'capture' || item.status == 'settlement'"
                 class="btn btn-warning text-white fw-bold d-block"
               >
-                Dalam Pengiriman
+                Menunggu Konfirmasi Seller
+              </span>
+              <span
+                v-else-if="item.status == 'delivering'"
+                class="btn btn-warning text-white fw-bold d-block"
+              >
+                Produk Sedang di Prosses & Dikirim
               </span>
               <span
                 v-else-if="item.status == 'pending' || item.status == 'UNPAID'"
@@ -42,7 +48,7 @@
               </span>
               <span v-else-if="item.status == 'finish'" class="btn btn-success text-white fw-bold d-block"> Selesai </span>
               <span v-else class="btn btn-danger text-white fw-bold d-block">
-                Produk Gagal Dibeli
+                Produk Batal Dibeli
               </span>
             </div>
           </div>
