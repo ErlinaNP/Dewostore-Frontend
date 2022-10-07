@@ -38,7 +38,7 @@
         :key="index"
       >
         <div class="card shadow" @click="modalitem(item)">
-          <img :src="checkUrl(item.photo)" />
+          <img class="i-height" :src="checkUrl(item.photo)" />
           <h6 class="px-3 pt-3">
             {{ item.title }}
           </h6>
